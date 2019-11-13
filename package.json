@@ -1,0 +1,19 @@
+{
+  "name": "aposentadora",
+  "version": "1.0.0",
+  "description": "Calculadora da aposentadoria",
+  "author": "Marco Machado",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "nuxt": "^2.0.0"
+  },
+  "devDependencies": {
+    "@nuxtjs/vuetify": "^1.0.0"
+  }
+}
