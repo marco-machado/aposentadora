@@ -17,7 +17,14 @@
 
           <v-stepper-step :complete="step > 2" step="2">Data de nascimento</v-stepper-step>
           <v-stepper-content step="2">
-            <v-text-field :dense="xsOnly" outlined v-model="dataNascimento" />
+            <v-text-field
+              :dense="xsOnly"
+              outlined
+              placeholder="dd/mm/yyyy"
+              type="tel"
+              v-mask="'##/##/####'"
+              v-model="dataNascimento"
+            />
             <v-btn @click="step = 3" color="primary" :small="xsOnly">Continuar</v-btn>
           </v-stepper-content>
 
@@ -36,8 +43,26 @@
 
           <v-stepper-step :complete="step > 5" step="5">Tempo de contribuição</v-stepper-step>
           <v-stepper-content step="5">
-            <v-text-field :dense="xsOnly" label="Anos" outlined v-model="anosContribuicao" />
-            <v-text-field :dense="xsOnly" label="Meses" outlined v-model="mesesContribuicao" />
+            <v-text-field
+              :dense="xsOnly"
+              label="Anos"
+              max="99"
+              min="0"
+              outlined
+              type="number"
+              v-mask="'##'"
+              v-model="anosContribuicao"
+            />
+            <v-text-field
+              :dense="xsOnly"
+              label="Meses"
+              max="11"
+              min="0"
+              outlined
+              type="number"
+              v-mask="'##'"
+              v-model="mesesContribuicao"
+            />
             <v-btn @click="onComplete()" color="primary" :small="xsOnly">Continuar</v-btn>
           </v-stepper-content>
 
@@ -51,7 +76,10 @@
     <v-dialog content-class="red" fullscreen v-model="dialog">
       <v-container fill-height>
         <v-row align="center" justify="center">
-          <span class="display-3 white--text">NUNCA!</span>
+          <div class="white--text">Poderá se aposentar em:</div>
+        </v-row>
+        <v-row align="center" justify="center">
+          <div class="display-3 white--text">NUNCA!</div>
         </v-row>
         <v-row justify="center">
           <v-btn @click="onReset()" color="white" outlined text>Voltar ao início</v-btn>
@@ -62,8 +90,13 @@
 </template>
 
 <script>
+import { mask } from "ke-the-mask";
+
 export default {
   name: "Home",
+  directives: {
+    mask
+  },
   data() {
     return {
       xsOnly: this.$vuetify.breakpoint.xsOnly,
@@ -73,7 +106,7 @@ export default {
       dataNascimento: "",
       anosContribuicao: "",
       mesesContribuicao: ""
-    }
+    };
   },
   methods: {
     onStep1(sexo) {
@@ -93,7 +126,7 @@ export default {
     }
   },
   head: () => ({
-    title: "Home"
+    title: "Calculadora"
   })
 };
 </script>
